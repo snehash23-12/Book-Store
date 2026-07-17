@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Project Documentation — ModernBooks</title>
+<meta name="description" content="Documentation for the ModernBooks Online Bookstore Platform — competition submission." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+<!-- =========================================================
+     HEADER (shared nav, simplified — no shop actions here)
+========================================================= -->
+<header class="site-header">
+  <div class="container nav-glass glass">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"><i class="fa-solid fa-feather-pointed"></i></span>
+      <span>ModernBooks <span class="brand-sub">Reading Room</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="index.html#shop">Shop</a>
+      <a href="about-project.html" class="active">Documentation</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle dark or light theme" title="Toggle theme">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+      <a href="index.html" class="btn btn-secondary">Back to Store</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-menu glass container" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="index.html#shop">Shop</a>
+    <a href="about-project.html">Documentation</a>
+  </nav>
+</header>
+
+<!-- =========================================================
+     DOC HERO
+========================================================= -->
+<section class="doc-hero container">
+  <p class="hero-eyebrow">Project Documentation</p>
+  <h1>Behind the Shelf: how ModernBooks was built</h1>
+  <p>A structured record of the ModernBooks Online Bookstore Platform — its purpose, its stack, the people who built it, and what it taught them.</p>
+  <nav class="doc-nav" aria-label="Documentation sections">
+    <a href="#overview">01 Overview</a>
+    <a href="#description">02 Description</a>
+    <a href="#stack">03 Tech Stack</a>
+    <a href="#team">04 Team</a>
+    <a href="#contribution">05 Contribution</a>
+    <a href="#challenges">06 Challenges</a>
+    <a href="#outcomes">07 Learning</a>
+    <a href="#feedback">08 Feedback</a>
+    <a href="#gallery">09 Gallery</a>
+    <a href="#repository">10 Repository</a>
+  </nav>
+</section>
+
+<!-- =========================================================
+     01 — PROJECT OVERVIEW
+========================================================= -->
+<section class="doc-section container" id="overview">
+  <span class="tag-number">01 / 10</span>
+  <div class="section-heading"><h2>Project Overview</h2></div>
+  <div class="glass doc-card">
+    <div class="info-grid">
+      <div class="info-item">
+        <h5>Project Title</h5>
+        <p>ModernBooks Online Bookstore Platform</p>
+      </div>
+      <div class="info-item">
+        <h5>Website Category</h5>
+        <p>E-Commerce / Digital Media Retail</p>
+      </div>
+      <div class="info-item">
+        <h5>Problem Statement</h5>
+        <p>Traditional physical bookstores lack immersive, fast-loading, framework-less alternative storefronts optimized equally well across old and ultra-modern web browsers.</p>
+      </div>
+      <div class="info-item">
+        <h5>Selection Reason</h5>
+        <p>Chosen to test the performance limits of modern layout engines (CSS Grid/Flexbox) and reactive local workflows (localStorage state) using raw JavaScript.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     02 — PROJECT DESCRIPTION
+========================================================= -->
+<section class="doc-section container" id="description">
+  <span class="tag-number">02 / 10</span>
+  <div class="section-heading"><h2>Project Description</h2></div>
+  <div class="glass doc-card">
+    <p style="color:var(--clr-ink-dim); max-width: 80ch;">
+      ModernBooks is a fully client-side online bookstore built to prove that a polished, e-commerce-grade shopping
+      experience does not require a framework. The application targets casual readers, students hunting for
+      affordable editions, and gift-shoppers who want to browse by mood as much as by title — a demographic that
+      responds well to fast filtering, visible pricing logic, and a shopping tray that never loses its contents on
+      refresh. Architecturally, the frontend is split into three independent layers: a semantic HTML5 structure that
+      remains readable without any styling, a CSS3 layer built entirely from custom properties so the glassmorphism
+      theme and its light/dark variants share one source of truth, and a JavaScript state layer that owns the
+      catalogue, cart, and wishlist as plain arrays synced to <code>localStorage</code>. Filtering, sorting, and
+      rating interactions all run through pure array methods (<code>filter</code>, <code>sort</code>, <code>reduce</code>)
+      rather than page reloads, so the shelf feels reactive without a virtual DOM. Looking beyond the competition
+      brief, the same architecture could scale into a real storefront by swapping the static catalogue array for a
+      fetch call to a headless commerce API, adding a checkout and payment step behind the existing cart ledger, and
+      introducing account-based wishlists once authentication is layered on top of the current localStorage model.
+    </p>
+  </div>
+</section>
+
+<!-- =========================================================
+     03 — TECHNOLOGY STACK
+========================================================= -->
+<section class="doc-section container" id="stack">
+  <span class="tag-number">03 / 10</span>
+  <div class="section-heading"><h2>Technology Stack</h2></div>
+  <div class="stack-columns">
+    <div class="stack-col glass">
+      <h5><i class="fa-brands fa-html5"></i> HTML5</h5>
+      <ul>
+        <li>Semantic sectioning (&lt;header&gt;, &lt;nav&gt;, &lt;section&gt;, &lt;aside&gt;, &lt;footer&gt;)</li>
+        <li>Accessible ARIA labels &amp; roles</li>
+        <li>Native &lt;form&gt;, &lt;input type="range"&gt;</li>
+        <li>Meta viewport for responsiveness</li>
+      </ul>
+    </div>
+    <div class="stack-col glass">
+      <h5><i class="fa-brands fa-css3-alt"></i> CSS3</h5>
+      <ul>
+        <li>Custom properties (design tokens)</li>
+        <li>backdrop-filter glassmorphism</li>
+        <li>CSS Grid &amp; Flexbox layout engine</li>
+        <li>Keyframe micro-interactions</li>
+      </ul>
+    </div>
+    <div class="stack-col glass">
+      <h5><i class="fa-brands fa-js"></i> JS</h5>
+      <ul>
+        <li>Array state management (map/filter/reduce)</li>
+        <li>localStorage persistence layer</li>
+        <li>Event delegation &amp; DOM queries</li>
+        <li>Debounced live search &amp; filters</li>
+      </ul>
+    </div>
+    <div class="stack-col glass">
+      <h5><i class="fa-solid fa-cloud"></i> Cloud Assets</h5>
+      <ul>
+        <li>Google Fonts — Fraunces, Inter, Space Mono</li>
+        <li>Font Awesome 6 icon set</li>
+        <li>Vercel static hosting</li>
+        <li>GitHub version control</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     04 — TEAM INFORMATION
+========================================================= -->
+<section class="doc-section container" id="team">
+  <span class="tag-number">04 / 10</span>
+  <div class="section-heading"><h2>Team Information</h2></div>
+  <h3></h3>
+  <div class="team-grid">
+    <div class="team-card glass">
+      <div class="team-avatar">CS</div>
+      <h4>C H Supriya</h4>
+      <div class="team-role">AI &amp; ML · 4th Year</div>
+      <div class="team-meta">
+        <span><i class="fa-solid fa-id-card"></i> Roll No: 1SP23AI015</span>
+        <span><i class="fa-solid fa-graduation-cap"></i> Department: AI &amp; ML</span>
+      </div>
+    </div>
+    <div class="team-card glass">
+      <div class="team-avatar">SS</div>
+      <h4>Sneha S H</h4>
+      <div class="team-role">AI &amp; ML · 4th Year</div>
+      <div class="team-meta">
+        <span><i class="fa-solid fa-id-card"></i> Roll No: 1SP23AI056</span>
+        <span><i class="fa-solid fa-graduation-cap"></i> Department: AI &amp; ML</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     05 — TEAM CONTRIBUTION TABLE
+========================================================= -->
+<section class="doc-section container" id="contribution">
+  <span class="tag-number">05 / 10</span>
+  <div class="section-heading"><h2>Team Contribution</h2></div>
+  <div class="glass doc-card">
+    <table class="doc-table">
+      <thead>
+        <tr><th>Team Member</th><th>Area of Ownership</th><th>Key Deliverables</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sneha S H</td>
+          <td>Core Application Logic</td>
+          <td>DOM rendering logic, glassmorphism UI theme engine, cart/wishlist state trackers</td>
+        </tr>
+        <tr>
+          <td>C H Supriya</td>
+          <td>Responsive Systems &amp; QA</td>
+          <td>Advanced responsive breakpoint layers, multi-device testing, documentation build engineering</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- =========================================================
+     06 — CHALLENGES FACED & RESOLUTIONS
+========================================================= -->
+<section class="doc-section container" id="challenges">
+  <span class="tag-number">06 / 10</span>
+  <div class="section-heading"><h2>Challenges Faced &amp; Structural Resolutions</h2></div>
+  <div class="challenge-grid">
+    <div class="challenge-card glass">
+      <h4><i class="fa-solid fa-layer-group"></i> Cross-browser backdrop-filter support</h4>
+      <p>The glassmorphism effect relies on <code>backdrop-filter</code>, which behaves inconsistently across older
+      Chromium builds and requires vendor prefixing on WebKit.</p>
+      <p class="resolution">Resolved by pairing every <code>backdrop-filter</code> declaration with a
+      <code>-webkit-backdrop-filter</code> fallback and a solid semi-transparent background colour, so the layout
+      degrades to a tinted panel rather than an invisible one on unsupported browsers.</p>
+    </div>
+    <div class="challenge-card glass">
+      <h4><i class="fa-solid fa-cart-shopping"></i> Nested array mutation for cart deletions</h4>
+      <p>Removing a single item from the cart array without mutating shared references caused stale badge counts
+      and duplicate toast notifications during rapid clicking.</p>
+      <p class="resolution">Resolved by rebuilding the cart as a fresh array on every mutation using
+      <code>Array.prototype.filter</code> instead of <code>splice</code>, then re-rendering from that single
+      source of truth so the UI, badge counts, and localStorage stay in sync on every call.</p>
+    </div>
+    <div class="challenge-card glass">
+      <h4><i class="fa-solid fa-mobile-screen"></i> Sticky filter sidebar on tablets</h4>
+      <p>A <code>position: sticky</code> sidebar collided with the collapsing grid on tablet widths, causing overlap
+      with book cards.</p>
+      <p class="resolution">Resolved in <code>responsive.css</code> by switching the sidebar to
+      <code>position: static</code> with a wrapped flex layout below 900px, restoring sticky behaviour only on
+      desktop viewports.</p>
+    </div>
+    <div class="challenge-card glass">
+      <h4><i class="fa-solid fa-database"></i> Persisting state without a backend</h4>
+      <p>Cart, wishlist, and theme preference needed to survive page reloads with zero server involvement.</p>
+      <p class="resolution">Resolved by centralising all mutable state in one <code>state</code> object and writing a
+      single <code>persist()</code> helper that serialises it to <code>localStorage</code> after every state-changing
+      action, with a matching hydration step on <code>DOMContentLoaded</code>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     07 — TECHNICAL LEARNING OUTCOMES
+========================================================= -->
+<section class="doc-section container" id="outcomes">
+  <span class="tag-number">07 / 10</span>
+  <div class="section-heading"><h2>Technical Learning Outcomes</h2></div>
+  <div class="outcomes-list">
+    <div class="outcome-item glass">
+      <i class="fa-solid fa-floppy-disk"></i>
+      <div><h5>State Persistence</h5><p>Structuring localStorage as a single serialisable snapshot of app state.</p></div>
+    </div>
+    <div class="outcome-item glass">
+      <i class="fa-solid fa-code-branch"></i>
+      <div><h5>DOM Node Queries</h5><p>Efficient querySelector usage and event delegation over static listeners.</p></div>
+    </div>
+    <div class="outcome-item glass">
+      <i class="fa-solid fa-clapperboard"></i>
+      <div><h5>Keyframe Execution Control</h5><p>Sequencing CSS keyframes and JS-driven class toggles for micro-interactions.</p></div>
+    </div>
+    <div class="outcome-item glass">
+      <i class="fa-solid fa-folder-tree"></i>
+      <div><h5>Asset Deployment Structure</h5><p>Organising a strict, competition-ready folder hierarchy for static hosting.</p></div>
+    </div>
+    <div class="outcome-item glass">
+      <i class="fa-solid fa-arrows-left-right"></i>
+      <div><h5>Cross-Axis Alignment</h5><p>Composing Grid and Flexbox together for nested, responsive layouts.</p></div>
+    </div>
+    <div class="outcome-item glass">
+      <i class="fa-solid fa-shield-halved"></i>
+      <div><h5>Defensive JavaScript</h5><p>Guarding array operations and localStorage reads against malformed data.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     08 — TRAINING FEEDBACK STATEMENT
+========================================================= -->
+<section class="doc-section container" id="feedback">
+  <span class="tag-number">08 / 10</span>
+  <div class="section-heading"><h2>Feedback Statement</h2></div>
+  <div class="glass feedback-card">
+    <i class="fa-solid fa-quote-left quote-mark"></i>
+    <p>
+      This project sharpened our foundational JavaScript skills far more than any lecture-based module could —
+      building the cart and filter systems from raw arrays forced us to actually understand state instead of
+      importing it from a framework. The training's step-by-step build flow, from static markup to a fully
+      interactive storefront, mirrored how real frontend teams incrementally ship features, and it left us
+      confident that we can build accessible, responsive interfaces without leaning on a UI library as a crutch.
+    </p>
+    <div class="feedback-sign">— Team ModernBooks</div>
+  </div>
+</section>
+
+<!-- =========================================================
+     09 — SCREENSHOTS GALLERY
+========================================================= -->
+<section class="doc-section container" id="gallery">
+  <span class="tag-number">09 / 10</span>
+  <div class="section-heading"><h2>Interactive Application Screenshots</h2></div>
+  <div class="gallery-grid">
+    <div class="gallery-slot glass wide" style="grid-column: span 3; background: url('images/home.png') center/cover no-repeat; border: none;">
+      <span>Desktop View — Homepage &amp; Hero Carousel</span>
+    </div>
+    <div class="gallery-slot glass" style="background: url('images/cart.png') center/cover no-repeat; border: none;">
+      <span>Shopping Workflow — Cart Drawer</span>
+    </div>
+    <div class="gallery-slot glass" style="background: url('images/Filters.png') center/cover no-repeat; border: none;">
+      <span>Live Filter &amp; Sort Panel</span>
+    </div>
+    <div class="gallery-slot glass">
+      <i class="fa-solid fa-mobile-screen-button"></i>
+      <span>Smartphone View — Mobile Menu</span>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     10 — SOURCE REPOSITORY LINKS
+========================================================= -->
+<section class="doc-section container" id="repository">
+  <span class="tag-number">10 / 10</span>
+  <div class="section-heading"><h2>Source Repository Links</h2></div>
+  <div class="repo-links">
+    <div class="repo-card glass">
+      <i class="fa-brands fa-github"></i>
+      <div>
+        <h5>GitHub Repository</h5>
+        <code>https://github.com/your-username/modernbooks</code>
+      </div>
+    </div>
+    <div class="repo-card glass">
+      <i class="fa-solid fa-rocket"></i>
+      <div>
+        <h5>Live Vercel Deployment</h5>
+        <code>https://modernbooks.vercel.app</code>
+      </div>
+    </div>
+  </div>
+  <div class="text-center">
+    <a href="index.html" class="btn btn-primary back-home"><i class="fa-solid fa-arrow-left"></i> Back to the Bookstore</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-bottom">
+    <span>© 2026 ModernBooks. Documentation page — Frontend Web Development Competition.</span>
+    <span>Built with HTML, CSS &amp; JS</span>
+  </div>
+</footer>
+
+<div class="toast-stack" id="toastStack" aria-live="polite"></div>
+<button class="scroll-top" id="scrollTopBtn" aria-label="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script src="js/script.js"></script>
+</body>
+</html>

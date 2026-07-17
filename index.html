@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ModernBooks — Online Bookstore</title>
+<meta name="description" content="ModernBooks — a glassmorphism-themed online bookstore built with HTML, CSS and JavaScript." />
+
+<!-- Google Fonts & Font Awesome (the only permitted external assets) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+<!-- =========================================================
+     HEADER & NAVIGATION
+========================================================= -->
+<header class="site-header">
+  <div class="container nav-glass glass">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"><i class="fa-solid fa-feather-pointed"></i></span>
+      <span>
+        ModernBooks
+        <span class="brand-sub">Reading Room</span>
+      </span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#hero" class="active">Home</a>
+      <a href="#shop">Shop</a>
+      <a href="#contact">Contact</a>
+      <a href="#newsletter">Newsletter</a>
+      <a href="about-project.html">Documentation</a>
+    </nav>
+
+    <form class="nav-search glass" role="search" id="navSearchForm">
+      <button type="submit" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <input type="text" id="navSearchInput" placeholder="Search title or author…" aria-label="Search books" />
+    </form>
+
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle dark or light theme" title="Toggle theme">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+      <button class="icon-btn" id="wishlistOpenBtn" aria-label="Open wishlist" title="Wishlist">
+        <i class="fa-regular fa-heart"></i>
+        <span class="badge-count" id="wishlistCount">0</span>
+      </button>
+      <button class="icon-btn" id="cartOpenBtn" aria-label="Open shopping cart" title="Cart">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="badge-count" id="cartCount">0</span>
+      </button>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <nav class="mobile-menu glass container" id="mobileMenu" aria-label="Mobile">
+    <a href="#hero">Home</a>
+    <a href="#shop">Shop</a>
+    <a href="#contact">Contact</a>
+    <a href="#newsletter">Newsletter</a>
+    <a href="about-project.html">Documentation</a>
+  </nav>
+</header>
+
+<!-- =========================================================
+     HERO SECTION
+========================================================= -->
+<section class="hero" id="hero">
+  <div class="spine-ribbon" aria-hidden="true"></div>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">Est. 2026</p>
+      <h1>Stories worth <span class="flip-word" id="flipWord">staying up for</span></h1>
+      <p class="lede">ModernBooks is a curated shelf of fiction, craft and ideas — every cover framed in frosted glass, every checkout as quiet as a library aisle.</p>
+      <div class="hero-ctas">
+        <a href="#shop" class="btn btn-primary"><i class="fa-solid fa-book-open"></i> Browse the Shelf</a>
+        <button class="btn btn-secondary" id="heroWishlistBtn"><i class="fa-regular fa-heart"></i> View Wishlist</button>
+      </div>
+      <div class="hero-stats">
+        <div><strong id="statBooks">0</strong><span>Titles Curated</span></div>
+        <div><strong>4.7</strong><span>Avg. Rating</span></div>
+        <div><strong>24h</strong><span>Dispatch Time</span></div>
+      </div>
+    </div>
+
+    <div class="hero-carousel glass" id="heroCarousel">
+      <div class="carousel-track" id="carouselTrack"><!-- slides injected by script.js --></div>
+      <button class="carousel-arrow prev" id="carouselPrev" aria-label="Previous slide"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="carousel-arrow next" id="carouselNext" aria-label="Next slide"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SHOP — FILTERS + BOOK GRID
+========================================================= -->
+<section class="shop" id="shop">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">The Shelf</span>
+      <h2>Every book, one honest catalogue</h2>
+      <p>Filter live by category, price, rating or keyword — the shelf rearranges itself instantly.</p>
+    </div>
+
+    <div class="shop-layout">
+      <!-- FILTER SIDEBAR -->
+      <aside class="filters glass" aria-label="Book filters">
+        <div class="filter-group">
+          <h4>Search</h4>
+          <div class="filter-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="filterSearch" placeholder="Title or author…" />
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Category</h4>
+          <div class="chip-list" id="categoryChips"><!-- injected --></div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Price Range</h4>
+          <input type="range" id="priceRange" min="0" max="60" step="1" value="60" />
+          <div class="range-row"><span>₹0</span><span id="priceRangeValue">Up to ₹60</span></div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Minimum Rating</h4>
+          <div class="rating-filter" id="ratingFilter">
+            <label><input type="radio" name="rating" value="0" checked /> Any rating</label>
+            <label><input type="radio" name="rating" value="4" /> <span class="stars">★★★★</span>+ &amp; up</label>
+            <label><input type="radio" name="rating" value="4.5" /> <span class="stars">★★★★</span>½+ &amp; up</label>
+          </div>
+        </div>
+
+        <button class="btn btn-ghost btn-block" id="resetFiltersBtn"><i class="fa-solid fa-rotate-left"></i> Reset filters</button>
+      </aside>
+
+      <!-- BOOK RESULTS -->
+      <div class="shop-results">
+        <div class="shop-toolbar glass">
+          <span class="results-count" id="resultsCount">0 titles found</span>
+          <div style="display:flex; gap:0.8rem; align-items:center;">
+            <select id="sortSelect" aria-label="Sort books">
+              <option value="popular">Sort: Popularity</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="rating">Rating</option>
+              <option value="title">Title A–Z</option>
+            </select>
+            <div class="view-toggle" role="group" aria-label="Grid or list view">
+              <button id="gridViewBtn" class="active" aria-label="Grid view"><i class="fa-solid fa-grip"></i></button>
+              <button id="listViewBtn" aria-label="List view"><i class="fa-solid fa-list"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="book-grid" id="bookGrid"><!-- book cards injected by script.js --></div>
+
+        <div class="load-more-wrap">
+          <button class="btn btn-secondary" id="loadMoreBtn"><i class="fa-solid fa-plus"></i> Load more titles</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     CONTACT US
+========================================================= -->
+<section class="contact-section container" id="contact">
+  <div class="contact-card glass">
+    <div class="contact-copy">
+      <span class="eyebrow">Contact us</span>
+      <h2>Need help finding your next read?</h2>
+      <p>Whether you’re building a personal shelf or looking for a gift, our reading room team is happy to help.</p>
+      <div class="contact-details">
+        <div><i class="fa-solid fa-location-dot"></i><span>K R Puram, Bangalore</span></div>
+        <div><i class="fa-solid fa-envelope"></i><span>hello@modernbooks.com</span></div>
+        <div><i class="fa-solid fa-phone"></i><span>+91 98765 43210</span></div>
+        <div><i class="fa-solid fa-clock"></i><span>Mon–Sat • 9am–9pm</span></div>
+      </div>
+    </div>
+
+    <form class="contact-form" id="contactForm">
+      <input type="text" name="name" placeholder="Your name" required />
+      <input type="email" name="email" placeholder="Email address" required />
+      <textarea name="message" rows="4" placeholder="Tell us what you’re looking for..." required></textarea>
+      <button type="submit" class="btn btn-primary">Send message</button>
+    </form>
+  </div>
+</section>
+
+<!-- =========================================================
+     NEWSLETTER
+========================================================= -->
+<section class="newsletter glass container" id="newsletter">
+  <h2>The Marginalia — our monthly letter</h2>
+  <p>One email a month: new arrivals, staff notes and a discount code. No spam, just paper.</p>
+  <form class="newsletter-form" id="newsletterForm">
+    <input type="email" required placeholder="you@example.com" aria-label="Email address" />
+    <button type="submit" class="btn btn-primary">Subscribe</button>
+  </form>
+</section>
+
+<!-- =========================================================
+     BOOK PREVIEW MODAL
+========================================================= -->
+<div class="preview-backdrop" id="previewBackdrop" aria-hidden="true"></div>
+<div class="preview-modal glass" id="previewModal" role="dialog" aria-modal="true" aria-labelledby="previewTitle" aria-hidden="true">
+  <button class="preview-close" id="previewCloseBtn" aria-label="Close preview"><i class="fa-solid fa-xmark"></i></button>
+
+  <div class="preview-shell">
+    <div class="preview-book-wrap">
+      <div class="preview-book" id="previewBook">
+        <div class="preview-cover" id="previewCover">
+          <span class="preview-chip">Interactive preview</span>
+          <h3 id="previewTitle">Book Title</h3>
+          <p id="previewAuthor">Author</p>
+        </div>
+        <div class="preview-page active" id="previewPage1">
+          <p class="preview-label">Opening page</p>
+          <h4 id="previewPageTitle1">A suspenseful start</h4>
+          <p id="previewPageBody1">The chapter opens with a room, a candle, and a detail that will not stay in the past.</p>
+        </div>
+        <div class="preview-page" id="previewPage2">
+          <p class="preview-label">Turn the page</p>
+          <h4 id="previewPageTitle2">A turning point</h4>
+          <p id="previewPageBody2">The tension rises as hidden motives meet the soft crackle of old floorboards.</p>
+        </div>
+        <div class="preview-page" id="previewPage3">
+          <p class="preview-label">Final preview</p>
+          <h4 id="previewPageTitle3">A memorable finish</h4>
+          <p id="previewPageBody3">The closing lines leave a sense of wonder, longing and just enough mystery.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="preview-copy">
+      <p class="eyebrow">Book flip preview</p>
+      <h3 id="previewHeading">Preview your next read</h3>
+      <p id="previewSummary">Tap “Turn the page” to see the story unfold in a cinematic page-turn animation.</p>
+      <div class="preview-actions">
+        <button class="btn btn-secondary" id="previewPrevBtn"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+        <button class="btn btn-primary" id="previewNextBtn"><i class="fa-solid fa-book-open"></i> Turn the page</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="brand"><span class="brand-mark"><i class="fa-solid fa-feather-pointed"></i></span> ModernBooks</a>
+        <p>A framework-free bookstore built for the Frontend Web Development Competition 2026.</p>
+        <div class="footer-social">
+          <a href="#" class="icon-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="icon-btn" aria-label="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="icon-btn" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        </div>
+      </div>
+      <div>
+        <h5>Shop</h5>
+        <ul>
+          <li><a href="#shop">All Books</a></li>
+          <li><a href="#shop">New Arrivals</a></li>
+          <li><a href="#shop">Bestsellers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about-project.html">Documentation</a></li>
+          <li><a href="#newsletter">Newsletter</a></li>
+          <li><a href="#hero">Home</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Support</h5>
+        <ul>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ModernBooks. Built for the Frontend Web Development Competition.</span>
+      <span>Crafted with HTML, CSS &amp; JS</span>
+    </div>
+  </div>
+</footer>
+
+<!-- =========================================================
+     CART / WISHLIST DRAWER
+========================================================= -->
+<div class="overlay" id="overlay"></div>
+
+<aside class="drawer glass" id="trayDrawer" aria-label="Cart and wishlist tray">
+  <div class="drawer-head">
+    <h3 id="drawerTitle">Your Cart</h3>
+    <button class="icon-btn" id="drawerCloseBtn" aria-label="Close tray"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-tabs">
+    <button id="cartTabBtn" class="active" data-tab="cart"><i class="fa-solid fa-bag-shopping"></i> Cart</button>
+    <button id="wishlistTabBtn" data-tab="wishlist"><i class="fa-regular fa-heart"></i> Wishlist</button>
+  </div>
+  <div class="drawer-body" id="drawerBody"><!-- injected --></div>
+  <div class="drawer-footer" id="cartFooter">
+    <div class="ledger-row"><span>Subtotal</span><span id="cartSubtotal">₹0.00</span></div>
+    <div class="ledger-row"><span>Discount</span><span id="cartDiscount">−₹0.00</span></div>
+    <div class="ledger-row total"><span>Total</span><span id="cartTotal">₹0.00</span></div>
+    <button class="btn btn-primary btn-block" id="checkoutBtn"><i class="fa-solid fa-lock"></i> Checkout</button>
+  </div>
+</aside>
+
+<!-- =========================================================
+     TOASTS & SCROLL TO TOP
+========================================================= -->
+<div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+<button class="scroll-top" id="scrollTopBtn" aria-label="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script src="js/script.js"></script>
+</body>
+</html>
