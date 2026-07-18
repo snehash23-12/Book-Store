@@ -381,6 +381,14 @@ button { cursor: pointer; }
   padding-block: var(--space-xl) var(--space-lg);
   overflow: hidden;
 }
+.tagline{
+    font-size: 20px;
+    color: #b8860b;
+    font-style: italic;
+    font-weight: 600;
+    margin: 15px 0;
+    letter-spacing: 1px;
+}
 
 .spine-ribbon {
   position: absolute;
